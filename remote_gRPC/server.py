@@ -40,8 +40,10 @@ class ConsultaService(interfaz_pb2_grpc.ConsultaServicer):
 
     # Metodo que permite consultar el promedio de notas de un estudiante por nombre o apellido
     def ConsultarNotas(self, request, context):
+        print(f"\n--- Petición Recibida (ConsultarNotas) ---\n{request}")
         # Se recorre la lista de estudiantes para encontrar el estudiante que coincide con el nombre o apellido enviado en la solicitud del cliente
         for estudiante in self.Estudiantes:
+            # Se compara el nombre o apellido del estudiante con el valor enviado en la solicitud del cliente sin importar mayusculas o minusculas
             if estudiante.nombre.lower() == request.estudiante.lower() or estudiante.apellido.lower() == request.estudiante.lower():
                 # Se retorna el promedio como respuestas al cliente
                 return interfaz_pb2.NotasReply(promedio=(estudiante.quiz + estudiante.taller) / 2)
@@ -51,8 +53,10 @@ class ConsultaService(interfaz_pb2_grpc.ConsultaServicer):
 
     # Metodo que permite consultar el grupo de un estudiante por nombre o apellido
     def ConsultarGrupo(self, request, context):
+        print(f"\n--- Petición Recibida (ConsultarGrupo) ---\n{request}")
         # Se recorre la lista de estudiantes para encontrar el estudiante que coincide con el nombre o apellido enviado en la solicitud del cliente
         for estudiante in self.Estudiantes:
+            # Se compara el nombre o apellido del estudiante con el valor enviado en la solicitud del cliente sin importar mayusculas o minusculas
             if estudiante.nombre.lower() == request.estudiante.lower() or estudiante.apellido.lower() == request.estudiante.lower():
                 # Se retorna el grupo como respuestas al cliente
                 return interfaz_pb2.GrupoReply(grupo=estudiante.grupo)
@@ -62,8 +66,10 @@ class ConsultaService(interfaz_pb2_grpc.ConsultaServicer):
 
     # Metodo que permite consultar las notas del quiz y taller de un estudiante por nombre o apellido
     def ConsultarEvaluaciones(self, request, context):
+        print(f"\n--- Petición Recibida (ConsultarEvaluaciones) ---\n{request}")
         # Se recorre la lista de estudiantes para encontrar el estudiante que coincide con el nombre o apellido enviado en la solicitud del cliente
         for estudiante in self.Estudiantes:
+            # Se compara el nombre o apellido del estudiante con el valor enviado en la solicitud del cliente sin importar mayusculas o minusculas
             if estudiante.nombre.lower() == request.estudiante.lower() or estudiante.apellido.lower() == request.estudiante.lower():
                 # Se retornan las notas del quiz y taller como respuestas al cliente
                 return interfaz_pb2.EvaluacionesReply(notaQuiz=estudiante.quiz, notaTaller=estudiante.taller)
